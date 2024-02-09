@@ -1,8 +1,6 @@
 - hosts: "{{ HOSTS | default('all') }}"
   become: yes
-  vars:
-    sites: Malioboro
-    os: Ubuntu
+  gather_facts: yes
 
   roles:
     - role: nginx
