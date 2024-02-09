@@ -1,0 +1,16 @@
+---
+- name: Ping my hosts
+  ansible.builtin.ping:
+
+- name: Print message
+  ansible.builtin.debug:
+    msg: Hello world {{ os }}
+
+- name: pasang paket
+  ansible.builtin.apt:
+    pkg:
+    - vim
+    - htop
+    - git
+    update_cache: yes
+    state: present
