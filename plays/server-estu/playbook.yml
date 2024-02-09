@@ -14,7 +14,7 @@
 
     - name: pasang paket
       ansible.builtin.apt:
-        name: vim
+        name: htop
         update_cache: yes
 
     - name: pasang nginx
@@ -30,7 +30,7 @@
     #     - restart nginx
 
     - name: salin template
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: templates/index.html.j2
         dest: /var/www/html/index.html
       notify:
