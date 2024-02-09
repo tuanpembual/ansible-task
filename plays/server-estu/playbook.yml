@@ -1,43 +1,10 @@
-- name: My first play
-  hosts: mesin1
+- hosts: "{{ HOSTS | default('all') }}"
+  become: yes
   vars:
     sites: Malioboro
     os: Ubuntu
-  become: yes
-  tasks:
-    - name: Ping my hosts
-      ansible.builtin.ping:
 
-    - name: Print message
-      ansible.builtin.debug:
-        msg: Hello world {{ os }}
-
-    - name: pasang paket
-      ansible.builtin.apt:
-        name: vim
-        update_cache: yes
-
-    - name: pasang nginx
-      ansible.builtin.apt:
-        name: nginx
-        update_cache: yes
-
-    # - name: salin berkas
-    #   ansible.builtin.copy:
-    #     src: files/index.html
-    #     dest: /var/www/html/index.html
-    #   notify:
-    #     - restart nginx
-
-    - name: salin template
-      ansible.builtin.copy:
-        src: templates/index.html.j2
-        dest: /var/www/html/index.html
-      notify:
-        - restart nginx
-
-  handlers:
-    - name: restart nginx
-      ansible.builtin.service:
-        name: nginx
-        state: restarted
+  roles:
+    - role: nginx
+      tags:
+        - nginx
